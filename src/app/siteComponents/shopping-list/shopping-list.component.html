@@ -1,0 +1,24 @@
+<div id="dirty" class="col s12 m4 l3">
+  <div class="card-panel hoverable  card blue-grey darken-1">
+    <div class="card-content white-text">
+      <span class="card-title">Add Stuff</span>
+    <form>
+        <div class="input-field">
+          <input id="first_name" type="text" name="New Shopping Item" [(ngModel)]="newItem">
+          <label for="first_name">item</label>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action" (click)="addItem()" >Add<i class="material-icons right">send</i>
+  		</button>
+    </form>
+  </div>
+    <div class="card-action">
+      <ul *ngFor="let item of shoppingItems | async">
+      	<li>{{item.$value}}</li>
+      	      <button class="btn waves-effect waves-light" type="submit"  (click)="removeItem(item.$key)" >
+    		<i class="material-icons right" name="trash"></i>
+  		</button>
+      </ul>
+
+    </div>
+  </div>
+</div>

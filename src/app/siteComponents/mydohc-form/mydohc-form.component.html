@@ -1,0 +1,44 @@
+<div class="col s12 m12 l12 ">
+  <div class="card-panel hoverable  card  grey lighten-5">
+    <div class="card-content row ">
+    	<form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+    		<div class="input-field col s6">
+				<label for="firstName">First Name</label>
+				<input type="text" name="firstName" [(ngModel)]="firstName" >
+			</div>
+			<div class="input-field col s6">
+				<label for="lastName">Last Name</label>
+				<input type="text" name="lastName" [(ngModel)]="lastName">
+			</div>
+			<div class="input-field col s6">
+				<label for="Phone">Phone</label>
+				<input type="text" name="Phone" [(ngModel)]="Phone">
+			</div>
+			<div class="input-field col s6">
+				<label for="Extension">Extension</label>
+				<input type="text" name="Extension" [(ngModel)]="Extension">
+			</div>
+				<div class="col s5 form-group" >
+				<label for="Department">Department</label>
+	 			<select class="browser-default" [(ngModel)]="Department" name="Department">
+	 				<option  disabled selected> Choose Your Option</option>
+					<option value="IT"> IT </option>
+					<option value="Pharma">Pharma</option>
+					<option value="HR">HR</option>
+					<option value="Marketing">Marketing</option>
+					<option value="Operations">Operations</option>
+					<option value="Patient Care">Patient Care</option>
+				</select>	
+				
+			</div>
+
+			<button class="waves-effect waves-light btn-large right">Submit</button>
+		</form>
+    </div>
+    <div class="card-action clear">
+    			
+    	
+    	</div>
+   </div>
+</div>
+

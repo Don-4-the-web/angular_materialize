@@ -1,0 +1,267 @@
+<div class="col s12 m12 l12">
+  <div class="card-panel hoverable  card  indigo darken-4">
+    <div class="row">
+      <div class="col s12 m6 l6">
+        <i (click)="changeState('add')" class="large material-icons addPerson"> person_add</i>
+      </div>
+      <div class="col s12 m6 l6 right">
+        <label> Filter By Department</label>
+        <select (change)="filterCategory(filteredCategory.value)" #filteredCategory>
+          <option value="0">Select</option>
+          <option *ngFor="let department of departments" value="{{department.name}}" >{{department.name}}</option>
+        </select>
+      </div>  
+    </div>
+  </div>
+</div>
+<!-- THIS IS THE ADD FORM -->
+<div *ngIf="appState == 'add'" class="row" >
+  <div class="col s12 m12 l12 ">
+    <div class="card-panel hoverable  card  grey lighten-5">
+      <div>
+        <div class="valign-wrapper">
+          <h3  class="col sm10 m11 l11 left">New Employee Form</h3>
+          <i (click)="changeState('default')" class="medium material-icons col sm2 m1 l1 right ">cancel</i>
+        </div>
+        <form (submit)="addEmployee(
+                first_name.value,
+                last_name.value,
+                title.value,
+                department.value,
+                years_in_business.value,
+                description.value,
+                phone.value,
+                extension.value,
+                email.value,
+                street_address.value,
+                city.value,
+                state.value,
+                zipcode.value
+                )">
+          <div class="row">
+            <div class="col s12 m6 l6">
+              <div class="input-field">
+                <input type="text" name="first_name" #first_name>
+                <label for="first_name">First Name </label>
+              </div>
+              <div class="input-field">
+                <input type="text" name="last_name" #last_name>
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+            <div class="col s12 m6 l6">
+              <div class="input-field">
+                <input type="text" name="title" #title>
+                <label for="title">Title</label>
+              </div>
+              <label>Department </label>
+              <select #department>
+                <option value="0">Select</option>
+                <option *ngFor="let department of departments" value="{{department.name}}" >{{department.name}}</option>
+              </select>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col s12 m6 l6 input-field">
+              <input type="text" name="start_date" #years_in_business>
+              <label for="start_date">Start Date</label>
+            </div>
+            <div class="col s12 m6 l6 materialize-textarea">
+              <textarea class="flow-text" #description></textarea>
+              <label>Description </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 m4 l4 input-field">
+              <input type="text" name="Phone" #phone>
+              <label for="Phone">Phone</label>
+            </div>
+            <div class="col s12 m4 l4 input-field">
+              <input type="text" name="extension" #extension>
+              <label for="extension">Extension</label>
+            </div>
+            <div class="col s12 m4 l4 input-field">
+              <input type="text" name="Email" #email>
+              <label for="Email">Email </label>
+            </div>
+          </div>
+           <div class="row">
+            <div class="col s12 m6 l6 input-field">
+              <input type="text" name="street_address" #street_address>
+              <label for="street_address">Street Address</label>
+            </div>
+            <div class="col s12 m6 l6 input-field">
+              <input type="text" name="City" #city>
+              <label for="City">City </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 m6 l6 input-field">
+              <input type="text" name="State" #state>
+              <label for="State">State</label>
+            </div>
+            <div class="col s12 m6 l6 input-field">
+              <input type="text" name="Zipcode" #zipcode>
+              <label for="Zipcode">Zipcode </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s3 m1 l1 right">
+              <input id="submitButton" type="submit" class="button" value="submit">
+            </div>   
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- THIS IS THE EDIT FORM -->
+<div *ngIf="appState == 'edit'" class="row" >
+  <div class="col s12 m12 l12 ">
+    <div class="card-panel hoverable  card  grey lighten-5">
+      <div>
+        <div class="valign-wrapper">
+          <h3  class="col sm10 m11 l11 left">Edit Employee Info</h3>
+          <i (click)="changeState('default')" class="medium material-icons col sm2 m1 l1 right ">cancel</i>
+        </div>
+     <form (submit)="updateEmployee()">
+        <div class="row">
+           <div class="col s12 m6 l6">
+             <div class="input-field">
+               <input type="text" [(ngModel)]="activeFirst_name" name="activeFirst_name" #first_name>
+               <label for="activeFirst_name"></label>
+             </div>
+             <div class="input-field">
+               <input type="text" [(ngModel)]="activeLast_name" name="activeLast_name"  #last_name>
+               <label for="activeLast_name"></label>
+             </div>
+           </div>
+           <div class="col s12 m6 l6">
+              <div class="input-field">
+                <input type="text" [(ngModel)]="activeTitle" name="activeTitle"  #title>
+                <label for="activeTitle"></label>
+              </div>
+                <label>Department </label>
+                <select [(ngModel)]="activeDepartment" name="activeDepartment" #department>
+                  <option value="0">Select</option>
+                  <option *ngFor="let department of departments" value="{{department.name}}" >{{department.name}}</option>
+                </select>
+           </div> 
+         </div>
+        <div class="row">
+           <div class="col s12 m6 l6 input-field">
+             <input type="text" [(ngModel)]="activeYears_in_business" name="activeYears_in_business"  #years_in_business>
+             <label for="activeYears_in_business"></label>
+           </div>
+        <div class="col s12 m6 l6 materialize-textarea">
+             <textarea class="flow-text" [(ngModel)]="activeDescription" name="activeDescription" #description></textarea>
+             <label>Description </label>
+          </div>
+        </div>
+         <div class="row">
+           <div class="col s12 m4 l4 input-field">
+             <input type="text" [(ngModel)]="activePhone" name="activePhone" #phone>
+             <label for="activePhone"></label>
+           </div>
+             <div class="col s12 m4 l4 input-field">
+             <input type="text" [(ngModel)]="activeEmail" name="activeEmail" #email>
+             <label for="activeEmail"> </label>
+           </div>
+           <div class="col s12 m4 l4 input-field">
+             <input type="text" [(ngModel)]="activeExtension" name="activeExtension"  #extension>
+             <label for="activeExtension">This</label>
+           </div>
+         </div>
+          <div class="row">
+           <div class="col s12 m6 l6 input-field">
+             <input type="text" [(ngModel)]="activeStreet_address" name="activeStreet_address" #street_address>
+             <label for="activeStreet_address"></label>
+           </div>
+           <div class="col s12 m6 l6 input-field">
+             <input type="text" [(ngModel)]="activeCity" name="activeCity" #city>
+             <label for="activeCity"></label>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col s12 m6 l6 input-field">
+             <input type="text" [(ngModel)]="activeZipcode" name="activeZipcode"  #zipcode>
+             <label for="activeZipcode"> </label>
+           </div>
+         </div>
+            <div class="row">
+              <div class="col s3 m1 l1 right">
+             <input id="submitButton" type="submit" class="button" value="submit">
+           </div>   
+         </div>
+        </form>
+      </div> 
+    </div>
+  </div>
+</div>
+<div *ngIf="appState == 'extend' " class="col s12 m12 l12 ">
+<div class="card-panel hoverable card  grey lighten-5">
+  <div class="row">
+    <div class="large-12 columns">
+      <i (click)="changeState('default')" class="medium material-icons col sm2 m1 l1 right">cancel</i>
+    </div>
+  </div>
+  <div *ngFor="let employee of employees">
+    <div *ngIf="employee.$key == activeKey">
+      <div class="row">
+        <div class="col s12 m5 l5">
+          <h3>{{employee.first_name}} {{employee.last_name}}</h3>
+          <p>Department: {{employee.department}}</p>
+          <p>Title: {{employee.title}}</p>
+          <p>Years in business: {{employee.years_in_business}}</p>
+          <p>{{employee.description}}</p>
+        </div>
+  <div class="col s12 m4 l4 right ">
+   <h4>Contact Info</h4>
+     <ul>
+       <li>Phone: {{employee.phone}}</li>
+       <li>Extension: {{employee.extension}}</li>
+       <li>Email: {{employee.email}}</li>
+       <li>Street: {{employee.street_address}}</li>
+       <li>City: {{employee.city}}</li>
+       <li>ZipCode: {{employee.zipcode}}</li>
+     </ul>
+    </div>
+  </div>
+  </div>
+  </div>
+ </div>
+</div>
+<div class="col s12 m12 l12 ">
+<div class="card-panel hoverable  card  grey lighten-5">
+<div class="row">
+  <div class="large-12 columns">
+    <div *ngIf="employees">
+        <table class="striped responsive-table">
+          <thead>
+            <tr>
+              <th>Name </th>
+              <th>Department </th>
+              <th>Title</th>
+              <th>Phone </th>
+              <th>Extension</th>
+              <th>More...</th>
+              <th>Edit Profile</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of employees">
+              <td>{{employee.first_name}} {{employee.last_name}}</td>
+              <td>{{employee.department}}</td>
+              <td>{{employee.title}}</td>
+              <td>{{employee.phone}}</td>
+              <td>{{employee.extension}}</td>
+              <td><i class="material-icons" (click)="changeState('extend', employee.$key)"> more_horiz</i></td>  
+              <td><i class="material-icons" (click)="showEdit(employee)"> edit</i></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
